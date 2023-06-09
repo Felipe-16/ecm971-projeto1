@@ -1,0 +1,27 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - # Comandos para build da aplicação
+
+ping_pong_teste:
+  stage: test
+  script:
+    - curl -X GET http://localhost:5000/ping-pong
+
+ordenacao_teste:
+  stage: test
+  script:
+    - curl -X POST -H "Content-Type: application/json" -d '{"nome":"demons"}' http://localhost:5000/musicas
+    - curl -X POST -H "Content-Type: application/json" -d '{"name":"one kiss"}' http://localhost:5000/musicas
+    - curl -X POST -H "Content-Type: application/json" -d '{"name":"mavladao 3"}' http://localhost:5000/musicas
+    - curl -X GET http://localhost:5000/musicas
+
+criar_musica_teste:
+  stage: test
+  script:
+    - curl -X POST -H "Content-Type: application/json" -d '{"nome":"nova musica"}' http://localhost:5000/musicas
+    - curl -X GET http://localhost:5000/musicas
